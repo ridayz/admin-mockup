@@ -32,6 +32,11 @@
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5 9 18 20 6"/></symbol>
       <symbol id="i-logout" viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l-5-5 5-5M5 12h11"/></symbol>
       <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4L12 3Z"/></symbol>
+      <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 19h16"/></symbol>
+      <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L20 8l-4-4L4 16v4Z"/><path d="M14 6l4 4"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3 7.5-7 9-4-1.5-7-4-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></symbol>
+      <symbol id="i-sort" viewBox="0 0 24 24"><path d="M8 6v12M8 18l-3-3M8 18l3-3M16 18V6M16 6l-3 3M16 6l3 3"/></symbol>
     </defs>
   </svg>
 
@@ -44,13 +49,13 @@
 
       <nav class="nav">
         <p class="nav-label">Workspace</p>
-        <a class="nav-item is-active" href="#" aria-current="page"><svg aria-hidden="true"><use href="#i-grid"/></svg><span>Overview</span></a>
-        <a class="nav-item" href="#"><svg aria-hidden="true"><use href="#i-chart"/></svg><span>Analytics</span></a>
-        <a class="nav-item" href="#"><svg aria-hidden="true"><use href="#i-users"/></svg><span>Pelanggan</span><span class="pill">128</span></a>
-        <a class="nav-item" href="#"><svg aria-hidden="true"><use href="#i-box"/></svg><span>Inventori</span></a>
-        <a class="nav-item" href="#"><svg aria-hidden="true"><use href="#i-bag"/></svg><span>Pesanan</span><span class="dot"></span></a>
+        <a class="nav-item" href="#/overview"><svg aria-hidden="true"><use href="#i-grid"/></svg><span>Overview</span></a>
+        <a class="nav-item" href="#/analytics"><svg aria-hidden="true"><use href="#i-chart"/></svg><span>Analytics</span></a>
+        <a class="nav-item" href="#/pelanggan"><svg aria-hidden="true"><use href="#i-users"/></svg><span>Pelanggan</span><span class="pill">128</span></a>
+        <a class="nav-item" href="#/inventori"><svg aria-hidden="true"><use href="#i-box"/></svg><span>Inventori</span></a>
+        <a class="nav-item" href="#/pesanan"><svg aria-hidden="true"><use href="#i-bag"/></svg><span>Pesanan</span><span class="dot"></span></a>
         <p class="nav-label">Sistem</p>
-        <a class="nav-item" href="#"><svg aria-hidden="true"><use href="#i-gear"/></svg><span>Pengaturan</span></a>
+        <a class="nav-item" href="#/pengaturan"><svg aria-hidden="true"><use href="#i-gear"/></svg><span>Pengaturan</span></a>
       </nav>
 
       <div class="upsell">
@@ -74,7 +79,7 @@
     <main class="main">
       <header class="topbar">
         <button class="icon-btn only-mobile" id="menuBtn" type="button" aria-label="Buka menu" aria-controls="sidebar" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
-        <div class="headline">
+        <div class="headline" id="pageHead">
           <p class="eyebrow">Kamis, 22 Oktober 2026</p>
           <h1>Halo Ridwan <span aria-hidden="true">👋</span></h1>
           <p class="sub">Ringkasan performa workspace <strong>Lumina Studio</strong> hari ini.</p>
@@ -87,10 +92,12 @@
           </label>
           <button class="icon-btn theme-btn" id="themeBtn" type="button" aria-label="Ganti tema" aria-pressed="false"><svg aria-hidden="true"><use href="#i-moon"/></svg></button>
           <button class="icon-btn has-badge" type="button" aria-label="3 notifikasi baru"><svg aria-hidden="true"><use href="#i-bell"/></svg><span class="badge">3</span></button>
-          <button class="btn btn-primary" type="button"><svg aria-hidden="true"><use href="#i-plus"/></svg> Pesanan baru</button>
+          <button class="btn btn-primary" id="primaryBtn" type="button"><svg aria-hidden="true"><use href="#i-plus"/></svg> Pesanan baru</button>
         </div>
       </header>
 
+      <!-- ══ Overview ══ -->
+      <div class="page" id="page-overview" role="region" aria-label="Overview">
       <section class="kpis" aria-label="Indikator utama">
         <article class="card kpi">
           <div class="kpi-head">
@@ -297,6 +304,326 @@
           </article>
         </div>
       </section>
+      </div><!-- /page-overview -->
+
+      <div class="page" id="page-analytics" role="region" aria-label="Analytics" hidden>
+        <section class="kpis" aria-label="Indikator analytics">
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-sky" aria-hidden="true"><svg><use href="#i-users"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>9,4%</span></div>
+            <p class="kpi-label">Sesi</p>
+            <p class="kpi-value">64,2<span>rb</span></p>
+            <svg class="spark" data-spark="12,15,14,19,17,22,21,25,27,30" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-mint" aria-hidden="true"><svg><use href="#i-trend"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>3,8%</span></div>
+            <p class="kpi-label">Tingkat pantul</p>
+            <p class="kpi-value">38,7<span>%</span></p>
+            <svg class="spark" data-spark="24,22,23,20,21,19,17,18,16,15" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-lilac" aria-hidden="true"><svg><use href="#i-chart"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>1m 12s</span></div>
+            <p class="kpi-label">Durasi rata-rata</p>
+            <p class="kpi-value">4:38</p>
+            <svg class="spark" data-spark="10,12,11,14,16,15,18,17,20,21" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-peach" aria-hidden="true"><svg><use href="#i-bag"/></svg></span><span class="delta down"><svg aria-hidden="true"><use href="#i-down"/></svg>0,6%</span></div>
+            <p class="kpi-label">Halaman / sesi</p>
+            <p class="kpi-value">5,4</p>
+            <svg class="spark" data-spark="18,17,18,16,17,15,16,14,15,14" aria-hidden="true"></svg>
+          </article>
+        </section>
+
+        <section class="layout-2">
+          <article class="card chart-card">
+            <header class="card-head">
+              <div><h2>Trafik harian</h2><p class="muted-sm">Sesi &amp; pengguna aktif · 14 hari</p></div>
+              <button class="link-btn" type="button"><svg aria-hidden="true"><use href="#i-download"/></svg> Ekspor</button>
+            </header>
+            <div class="chart-legend" aria-hidden="true">
+              <span><i class="sw sw-a"></i>Sesi</span>
+              <span><i class="sw sw-b"></i>Pengguna aktif</span>
+            </div>
+            <div class="chart-wrap">
+              <svg class="area" viewBox="0 0 680 220" preserveAspectRatio="none" role="img" aria-label="Grafik sesi dan pengguna aktif 14 hari terakhir, stabil naik">
+                <g class="grid-lines"><line x1="0" y1="40" x2="680" y2="40"/><line x1="0" y1="90" x2="680" y2="90"/><line x1="0" y1="140" x2="680" y2="140"/><line x1="0" y1="190" x2="680" y2="190"/></g>
+                <path class="area-a" d="M0 172 C55 168 85 150 130 148 C180 146 210 158 260 138 C310 118 340 126 390 104 C440 82 480 96 530 72 C580 48 620 58 680 40 L680 220 L0 220 Z"/>
+                <path class="line-a" d="M0 172 C55 168 85 150 130 148 C180 146 210 158 260 138 C310 118 340 126 390 104 C440 82 480 96 530 72 C580 48 620 58 680 40"/>
+                <path class="area-b" d="M0 190 C60 186 95 176 145 172 C200 168 230 160 285 150 C340 140 375 132 430 120 C485 108 525 104 580 92 C630 82 655 78 680 72 L680 220 L0 220 Z"/>
+                <path class="line-b" d="M0 190 C60 186 95 176 145 172 C200 168 230 160 285 150 C340 140 375 132 430 120 C485 108 525 104 580 92 C630 82 655 78 680 72"/>
+              </svg>
+              <div class="axis" aria-hidden="true"><span>9 Okt</span><span>13 Okt</span><span>17 Okt</span><span>22 Okt</span></div>
+            </div>
+            <div class="mini-stats">
+              <div><p class="muted-xs">Sesi total</p><p class="mini-val">64.208</p></div>
+              <div><p class="muted-xs">Pengguna unik</p><p class="mini-val">21.930</p></div>
+              <div><p class="muted-xs">Konversi</p><p class="mini-val">3,1%</p></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <header class="card-head">
+              <div><h2>Halaman terpopuler</h2><p class="muted-sm">Berdasarkan tampilan</p></div>
+            </header>
+            <ul class="bars">
+              <li><span class="bar-name">/beranda</span><div class="bar"><i style="width:100%"></i></div><b>18.402</b></li>
+              <li><span class="bar-name">/produk</span><div class="bar"><i style="width:78%"></i></div><b>14.310</b></li>
+              <li><span class="bar-name">/harga</span><div class="bar"><i style="width:54%"></i></div><b>9.904</b></li>
+              <li><span class="bar-name">/blog/:slug</span><div class="bar"><i style="width:41%"></i></div><b>7.512</b></li>
+              <li><span class="bar-name">/checkout</span><div class="bar"><i style="width:23%"></i></div><b>4.228</b></li>
+            </ul>
+            <p class="tip"><svg aria-hidden="true"><use href="#i-spark"/></svg> <span><strong>/harga</strong> naik 2 peringkat minggu ini.</span></p>
+          </article>
+        </section>
+
+        <section class="card">
+          <header class="card-head">
+            <div><h2>Performa kanal</h2><p class="muted-sm">Klik header untuk mengurutkan</p></div>
+            <div class="filters"><button class="chip is-on" type="button" aria-pressed="true">7 hari</button><button class="chip" type="button" aria-pressed="false">30 hari</button><button class="chip" type="button" aria-pressed="false">90 hari</button></div>
+          </header>
+          <div class="table-scroll">
+            <table data-sortable>
+              <thead><tr><th scope="col">Kanal</th><th scope="col">Sumber</th><th scope="col" class="num sortable" data-sort="1">Sesi</th><th scope="col" class="num">Konversi</th><th scope="col" class="num">Pendapatan</th></tr></thead>
+              <tbody>
+                <tr><td><b>Organik</b></td><td><span class="tag tag-soft">Google</span></td><td class="num">26.980</td><td class="num">4,2%</td><td class="num">Rp 412jt</td></tr>
+                <tr><td><b>Sosial</b></td><td><span class="tag tag-soft">Instagram</span></td><td class="num">17.340</td><td class="num">2,8%</td><td class="num">Rp 286jt</td></tr>
+                <tr><td><b>Langsung</b></td><td><span class="tag tag-soft">Direct</span></td><td class="num">12.204</td><td class="num">5,1%</td><td class="num">Rp 318jt</td></tr>
+                <tr><td><b>Email</b></td><td><span class="tag tag-soft">Newsletter</span></td><td class="num">7.684</td><td class="num">6,4%</td><td class="num">Rp 224jt</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+      <div class="page" id="page-pelanggan" role="region" aria-label="Pelanggan" hidden>
+        <section class="kpis" aria-label="Ringkasan pelanggan">
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-lilac" aria-hidden="true"><svg><use href="#i-users"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>128</span></div>
+            <p class="kpi-label">Total pelanggan</p><p class="kpi-value">8.412</p>
+            <svg class="spark" data-spark="10,12,13,15,14,17,19,20,22,24" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-mint" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>2,1%</span></div>
+            <p class="kpi-label">Pelanggan baru</p><p class="kpi-value">412</p>
+            <svg class="spark" data-spark="8,10,9,13,12,15,14,18,17,20" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-peach" aria-hidden="true"><svg><use href="#i-trend"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>0,8%</span></div>
+            <p class="kpi-label">Retensi 90 hari</p><p class="kpi-value">71,3<span>%</span></p>
+            <svg class="spark" data-spark="14,15,15,16,17,16,18,19,19,20" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-sky" aria-hidden="true"><svg><use href="#i-bag"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>Rp 42rb</span></div>
+            <p class="kpi-label">Nilai seumur hidup</p><p class="kpi-value">Rp 1,8<span>jt</span></p>
+            <svg class="spark" data-spark="16,17,16,18,19,18,20,21,20,23" aria-hidden="true"></svg>
+          </article>
+        </section>
+
+        <section class="card table-card">
+          <header class="card-head">
+            <div><h2>Daftar pelanggan</h2><p class="muted-sm" id="custCount">8.412 pelanggan</p></div>
+            <div class="filters">
+              <label class="search search-inline">
+                <svg aria-hidden="true"><use href="#i-search"/></svg>
+                <input type="search" id="custSearch" placeholder="Cari nama atau email…" aria-label="Cari pelanggan">
+              </label>
+              <button class="chip is-on" type="button" data-filter="all" aria-pressed="true">Semua</button>
+              <button class="chip" type="button" data-filter="aktif" aria-pressed="false">Aktif</button>
+              <button class="chip" type="button" data-filter="baru" aria-pressed="false">Baru</button>
+            </div>
+          </header>
+          <div class="table-scroll">
+            <table id="custTable">
+              <thead><tr><th scope="col">Pelanggan</th><th scope="col">Email</th><th scope="col">Status</th><th scope="col" class="num">Pesanan</th><th scope="col" class="num">Total belanja</th><th scope="col"><span class="sr-only">Aksi</span></th></tr></thead>
+              <tbody>
+                <tr data-status="aktif"><td><span class="who"><span class="avatar sm av-a">DS</span><b>Dewi Sartika</b></span></td><td class="muted-cell">dewi.s@mail.com</td><td><span class="tag tag-ok">Aktif</span></td><td class="num">24</td><td class="num">Rp 12,4jt</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi Dewi Sartika"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="baru"><td><span class="who"><span class="avatar sm av-b">BP</span><b>Bagus Pratama</b></span></td><td class="muted-cell">bagus.p@mail.com</td><td><span class="tag tag-soft">Baru</span></td><td class="num">2</td><td class="num">Rp 645rb</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi Bagus Pratama"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="aktif"><td><span class="who"><span class="avatar sm av-c">SN</span><b>Sinta Nur</b></span></td><td class="muted-cell">sinta.n@mail.com</td><td><span class="tag tag-ok">Aktif</span></td><td class="num">18</td><td class="num">Rp 9,8jt</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi Sinta Nur"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="nonaktif"><td><span class="who"><span class="avatar sm av-d">AH</span><b>Agus Hidayat</b></span></td><td class="muted-cell">agus.h@mail.com</td><td><span class="tag tag-warn">Tidak aktif</span></td><td class="num">3</td><td class="num">Rp 740rb</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi Agus Hidayat"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="baru"><td><span class="who"><span class="avatar sm av-e">MR</span><b>Maya Rani</b></span></td><td class="muted-cell">maya.r@mail.com</td><td><span class="tag tag-soft">Baru</span></td><td class="num">1</td><td class="num">Rp 320rb</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi Maya Rani"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="aktif"><td><span class="who"><span class="avatar sm av-a">RK</span><b>Rizky Kurnia</b></span></td><td class="muted-cell">rizky.k@mail.com</td><td><span class="tag tag-ok">Aktif</span></td><td class="num">31</td><td class="num">Rp 18,2jt</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi Rizky Kurnia"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="empty-state" id="custEmpty" hidden>Tidak ada pelanggan yang cocok. <button class="link-btn" type="button" id="custReset">Reset filter</button></p>
+          <footer class="card-foot"><span class="muted-sm" id="custShown">Menampilkan 6 dari 8.412</span><button class="link-btn" type="button">Muat lebih banyak <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></footer>
+        </section>
+      </div>
+      <div class="page" id="page-inventori" role="region" aria-label="Inventori" hidden>
+        <section class="kpis" aria-label="Ringkasan inventori">
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-sky" aria-hidden="true"><svg><use href="#i-box"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>14</span></div>
+            <p class="kpi-label">SKU aktif</p><p class="kpi-value">1.284</p>
+            <svg class="spark" data-spark="20,20,21,21,22,23,23,24,24,25" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-peach" aria-hidden="true"><svg><use href="#i-down"/></svg></span><span class="delta down"><svg aria-hidden="true"><use href="#i-down"/></svg>3</span></div>
+            <p class="kpi-label">Stok menipis</p><p class="kpi-value">23</p>
+            <svg class="spark" data-spark="10,12,11,14,13,16,15,18,17,19" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-mint" aria-hidden="true"><svg><use href="#i-trend"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>Rp 18jt</span></div>
+            <p class="kpi-label">Nilai stok</p><p class="kpi-value">Rp 482<span>jt</span></p>
+            <svg class="spark" data-spark="12,13,12,15,14,16,17,16,19,20" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-lilac" aria-hidden="true"><svg><use href="#i-chart"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>0,4x</span></div>
+            <p class="kpi-label">Perputaran / bulan</p><p class="kpi-value">3,6<span>x</span></p>
+            <svg class="spark" data-spark="15,16,15,17,18,17,19,20,19,22" aria-hidden="true"></svg>
+          </article>
+        </section>
+
+        <section class="layout-2 pale-right">
+          <article class="card table-card">
+            <header class="card-head">
+              <div><h2>Stok per produk</h2><p class="muted-sm">Urut dari yang paling kritis</p></div>
+              <div class="filters"><button class="chip is-on" type="button" aria-pressed="true">Semua</button><button class="chip" type="button" aria-pressed="false">Menipis</button></div>
+            </header>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Produk</th><th scope="col">SKU</th><th scope="col" class="num">Stok</th><th scope="col">Level</th><th scope="col">Status</th></tr></thead>
+                <tbody>
+                  <tr><td><b>Keramik A3 Pastel</b></td><td class="muted-cell">KRM-A3-01</td><td class="num">8</td><td><div class="bar bar-inline"><i class="lvl-bad" style="width:12%"></i></div></td><td><span class="tag tag-bad">Kritis</span></td></tr>
+                  <tr><td><b>Vas Linnea 24cm</b></td><td class="muted-cell">VAS-LN-24</td><td class="num">21</td><td><div class="bar bar-inline"><i class="lvl-warn" style="width:26%"></i></div></td><td><span class="tag tag-warn">Menipis</span></td></tr>
+                  <tr><td><b>Set Piring Sage</b></td><td class="muted-cell">PRS-SG-06</td><td class="num">64</td><td><div class="bar bar-inline"><i class="lvl-ok" style="width:62%"></i></div></td><td><span class="tag tag-ok">Aman</span></td></tr>
+                  <tr><td><b>Lampu Meja Bloom</b></td><td class="muted-cell">LMP-BL-02</td><td class="num">112</td><td><div class="bar bar-inline"><i class="lvl-ok" style="width:88%"></i></div></td><td><span class="tag tag-ok">Aman</span></td></tr>
+                  <tr><td><b>Bantal Linen Cloud</b></td><td class="muted-cell">BNT-CL-40</td><td class="num">17</td><td><div class="bar bar-inline"><i class="lvl-warn" style="width:22%"></i></div></td><td><span class="tag tag-warn">Menipis</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <footer class="card-foot"><span class="muted-sm">5 dari 1.284 SKU</span><button class="link-btn" type="button">Kelola inventori <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></footer>
+          </article>
+
+          <div class="stack">
+            <article class="card">
+              <header class="card-head"><div><h2>Gudang</h2><p class="muted-sm">Kapasitas terpakai</p></div></header>
+              <ul class="bars">
+                <li><span class="bar-name">Jakarta</span><div class="bar"><i style="width:82%"></i></div><b>82%</b></li>
+                <li><span class="bar-name">Bandung</span><div class="bar"><i style="width:54%"></i></div><b>54%</b></li>
+                <li><span class="bar-name">Surabaya</span><div class="bar"><i style="width:37%"></i></div><b>37%</b></li>
+              </ul>
+            </article>
+            <article class="card goal">
+              <header class="card-head"><div><h2>Restock otomatis</h2><p class="muted-sm">Ambang batas 15 unit</p></div><span class="tag tag-ok">Aktif</span></header>
+              <p class="goal-num">23<small>SKU di bawah ambang</small></p>
+              <div class="progress" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100" aria-label="23 dari 72 SKU menipis"><span style="width:32%"></span></div>
+              <p class="muted-sm">3 pengiriman PO dijadwalkan minggu ini.</p>
+            </article>
+          </div>
+        </section>
+      </div>
+      <div class="page" id="page-pesanan" role="region" aria-label="Pesanan" hidden>
+        <section class="kpis" aria-label="Ringkasan pesanan">
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-lilac" aria-hidden="true"><svg><use href="#i-bag"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>18,9%</span></div>
+            <p class="kpi-label">Pesanan bulan ini</p><p class="kpi-value">1.204</p>
+            <svg class="spark" data-spark="9,11,14,13,18,20,19,23,25,28" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-peach" aria-hidden="true"><svg><use href="#i-box"/></svg></span><span class="delta down"><svg aria-hidden="true"><use href="#i-down"/></svg>6</span></div>
+            <p class="kpi-label">Perlu diproses</p><p class="kpi-value">37</p>
+            <svg class="spark" data-spark="18,17,19,16,17,15,16,15,14,13" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-mint" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>12,4%</span></div>
+            <p class="kpi-label">Pendapatan</p><p class="kpi-value">Rp 284,6<span>jt</span></p>
+            <svg class="spark" data-spark="8,12,9,15,13,18,16,22,20,26" aria-hidden="true"></svg>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-head"><span class="kpi-icon t-sky" aria-hidden="true"><svg><use href="#i-x"/></svg></span><span class="delta up"><svg aria-hidden="true"><use href="#i-up"/></svg>0,3%</span></div>
+            <p class="kpi-label">Tingkat batal</p><p class="kpi-value">1,2<span>%</span></p>
+            <svg class="spark" data-spark="16,15,16,14,15,14,13,14,13,12" aria-hidden="true"></svg>
+          </article>
+        </section>
+
+        <section class="card table-card">
+          <header class="card-head">
+            <div><h2>Semua pesanan</h2><p class="muted-sm" id="ordCount">6 pesanan ditampilkan</p></div>
+            <div class="filters" id="ordFilters">
+              <button class="chip is-on" type="button" data-filter="all" aria-pressed="true">Semua</button>
+              <button class="chip" type="button" data-filter="diproses" aria-pressed="false">Diproses</button>
+              <button class="chip" type="button" data-filter="selesai" aria-pressed="false">Selesai</button>
+              <button class="chip" type="button" data-filter="dibatalkan" aria-pressed="false">Dibatalkan</button>
+            </div>
+          </header>
+          <div class="table-scroll">
+            <table id="ordTable">
+              <thead><tr><th scope="col">Pesanan</th><th scope="col">Pelanggan</th><th scope="col">Status</th><th scope="col">Pembayaran</th><th scope="col" class="num">Total</th><th scope="col"><span class="sr-only">Aksi</span></th></tr></thead>
+              <tbody>
+                <tr data-status="selesai"><td><b>#LM-4821</b><small class="block">22 Okt · 09:14</small></td><td><span class="who"><span class="avatar sm av-a">DS</span>Dewi Sartika</span></td><td><span class="tag tag-ok">Selesai</span></td><td class="muted-cell">Transfer BCA</td><td class="num">Rp 1.280.000</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi LM-4821"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="diproses"><td><b>#LM-4820</b><small class="block">22 Okt · 08:52</small></td><td><span class="who"><span class="avatar sm av-b">BP</span>Bagus Pratama</span></td><td><span class="tag tag-warn">Diproses</span></td><td class="muted-cell">QRIS</td><td class="num">Rp 645.000</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi LM-4820"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="selesai"><td><b>#LM-4819</b><small class="block">21 Okt · 19:03</small></td><td><span class="who"><span class="avatar sm av-c">SN</span>Sinta Nur</span></td><td><span class="tag tag-ok">Selesai</span></td><td class="muted-cell">Kartu kredit</td><td class="num">Rp 2.940.000</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi LM-4819"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="dibatalkan"><td><b>#LM-4818</b><small class="block">21 Okt · 16:41</small></td><td><span class="who"><span class="avatar sm av-d">AH</span>Agus Hidayat</span></td><td><span class="tag tag-bad">Dibatalkan</span></td><td class="muted-cell">Transfer Mandiri</td><td class="num">Rp 320.000</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi LM-4818"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="diproses"><td><b>#LM-4817</b><small class="block">21 Okt · 14:20</small></td><td><span class="who"><span class="avatar sm av-e">MR</span>Maya Rani</span></td><td><span class="tag tag-warn">Diproses</span></td><td class="muted-cell">QRIS</td><td class="num">Rp 1.870.000</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi LM-4817"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+                <tr data-status="selesai"><td><b>#LM-4816</b><small class="block">21 Okt · 11:07</small></td><td><span class="who"><span class="avatar sm av-a">RK</span>Rizky Kurnia</span></td><td><span class="tag tag-ok">Selesai</span></td><td class="muted-cell">Transfer BCA</td><td class="num">Rp 4.120.000</td><td class="num"><button class="icon-btn xs" type="button" aria-label="Aksi LM-4816"><svg aria-hidden="true"><use href="#i-more"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="empty-state" id="ordEmpty" hidden>Tidak ada pesanan dengan status ini.</p>
+          <footer class="card-foot"><span class="muted-sm">Halaman 1 dari 241</span><button class="link-btn" type="button">Lihat semua <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></footer>
+        </section>
+      </div>
+      <div class="page" id="page-pengaturan" role="region" aria-label="Pengaturan" hidden>
+        <section class="layout-2 pale-right">
+          <div class="stack">
+            <article class="card">
+              <header class="card-head"><div><h2>Profil workspace</h2><p class="muted-sm">Tampil di invoice dan email pelanggan</p></div></header>
+              <form class="form" onsubmit="return false">
+                <div class="field"><label for="wsName">Nama workspace</label><input id="wsName" type="text" value="Lumina Studio"></div>
+                <div class="field"><label for="wsEmail">Email kontak</label><input id="wsEmail" type="email" value="halo@lumina.studio"></div>
+                <div class="field"><label for="wsTz">Zona waktu</label>
+                  <select id="wsTz"><option>Asia/Jakarta (WIB)</option><option>Asia/Makassar (WITA)</option><option>Asia/Jayapura (WIT)</option></select>
+                </div>
+                <button class="btn btn-primary" type="submit" id="saveProfile"><svg aria-hidden="true"><use href="#i-check"/></svg> Simpan perubahan</button>
+                <p class="form-note" id="saveNote" role="status" hidden>Perubahan disimpan (simulasi).</p>
+              </form>
+            </article>
+
+            <article class="card">
+              <header class="card-head"><div><h2>Preferensi tampilan</h2><p class="muted-sm">Berlaku untuk akun ini saja</p></div></header>
+              <ul class="switch-list">
+                <li>
+                  <div><strong>Tema gelap</strong><p class="muted-sm">Samakan dengan tombol bulan di header.</p></div>
+                  <button class="switch" id="themeSwitch" type="button" role="switch" aria-checked="false" aria-label="Tema gelap"><i></i></button>
+                </li>
+                <li>
+                  <div><strong>Animasi</strong><p class="muted-sm">Matikan bila perangkat terasa lambat.</p></div>
+                  <button class="switch" id="motionSwitch" type="button" role="switch" aria-checked="true" aria-label="Animasi"><i></i></button>
+                </li>
+                <li>
+                  <div><strong>Notifikasi email</strong><p class="muted-sm">Ringkasan harian jam 08.00.</p></div>
+                  <button class="switch" id="mailSwitch" type="button" role="switch" aria-checked="true" aria-label="Notifikasi email"><i></i></button>
+                </li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="stack">
+            <article class="card">
+              <header class="card-head"><div><h2>Densitas data</h2><p class="muted-sm">Jarak antar-baris tabel</p></div></header>
+              <div class="radio-list" role="radiogroup" aria-label="Densitas data">
+                <button class="radio" role="radio" aria-checked="true" type="button" data-density="nyaman"><i></i><span><b>Nyaman</b><small>Baris 11px padding</small></span></button>
+                <button class="radio" role="radio" aria-checked="false" type="button" data-density="rapat"><i></i><span><b>Rapat</b><small>Baris 6px padding</small></span></button>
+              </div>
+            </article>
+
+            <article class="card">
+              <header class="card-head"><div><h2>Keamanan</h2><p class="muted-sm">Status akun</p></div><span class="tag tag-ok">Terlindungi</span></header>
+              <ul class="check-list">
+                <li><svg aria-hidden="true"><use href="#i-shield"/></svg><span>Autentikasi dua faktor aktif</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Sesi terakhir: Jakarta, hari ini</span></li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>3 perangkat dipercaya</span></li>
+              </ul>
+              <button class="btn btn-light btn-sm" type="button" style="margin-top:12px"><svg aria-hidden="true"><use href="#i-logout"/></svg> Keluar dari semua perangkat</button>
+            </article>
+
+            <article class="card">
+              <header class="card-head"><div><h2>Zona berbahaya</h2><p class="muted-sm">Tindakan permanen</p></div></header>
+              <p class="muted-sm" style="margin-top:10px">Menghapus workspace menghilangkan semua data pesanan dan pelanggan secara permanen.</p>
+              <button class="btn btn-danger btn-sm" type="button" id="dangerBtn" style="margin-top:10px">Hapus workspace</button>
+            </article>
+          </div>
+        </section>
+      </div>
 
       <footer class="page-foot">
         <span>© 2026 Lumina — mockup UI, data dummy.</span>
@@ -305,5 +632,6 @@
     </main>
   </div>
   <script src="app.js"></script>
+  <script src="router.js"></script>
 </body>
 </html>

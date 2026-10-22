@@ -8,11 +8,43 @@ Mockup dashboard admin bergaya pastel, single-page, tanpa build step, tanpa depe
 | --- | --- |
 | `index.html` | Struktur UI + sprite ikon SVG inline (`<symbol id="i-*">`) |
 | `styles.css` | Token design system + seluruh layout/responsive |
-| `app.js` | Sparkline render, toggle theme, drawer mobile, filter chip |
+| `app.js` | Sparkline render, toggle theme, segmented/chip generik, shortcut ⌘K |
+| `router.js` | Hash router, 6 halaman, drawer mobile, filter/pencarian, sort tabel, pengaturan |
 
 Cara lihat: buka `index.html` langsung di browser (buka via `file://` sudah cukup, tidak butuh server).
 
+## Routing & halaman
+
+Router berbasis hash (`#/nama`) — tidak butuh server, bekerja di `file://`, dan tombol Back/Forward browser jalan.
+
+| Rute | Halaman | Konten utama |
+| --- | --- | --- |
+| `#/overview` (default) | Overview | 4 KPI, area chart 30 hari, donut trafik, tabel pesanan, feed live, target bulanan |
+| `#/analytics` | Analytics | KPI sesi/bounce/durasi, chart 14 hari, halaman terpopuler (bar), tabel kanal **sortable** |
+| `#/pelanggan` | Pelanggan | KPI retensi/LTV, tabel pelanggan dengan **pencarian live + filter status + empty state** |
+| `#/inventori` | Inventori | KPI stok, tabel level stok (bar kritis/menipis/aman), kapasitas gudang, restock |
+| `#/pesanan` | Pesanan | KPI pesanan, tabel dengan **filter status** (semua/diproses/selesai/dibatalkan) |
+| `#/pengaturan` | Pengaturan | Form profil, switch tema/animasi/email, densitas tabel, keamanan, zona berbahaya |
+
+Menambah halaman baru: (1) `<div class="page" id="page-xxx" hidden>` di `index.html`, (2) entri di objek `PAGES` (`router.js`) berisi `title`/`sub`/`cta`, (3) `<a class="nav-item" href="#/xxx">` di sidebar. Header, tombol CTA, `document.title`, dan state aktif sidebar otomatis ikut — tidak perlu ubah markup header.
+
+Logika per-halaman didaftarkan di `hydrate(name)` dan di-bind **sekali** lewat `bind()` (WeakSet), jadi bolak-balik antar menu tidak menumpuk event listener.
+
+Interaksi yang benar-benar berfungsi (bukan dekorasi):
+
+- Navigasi sidebar (klik + keyboard, anchor asli), tombol Back browser, hash langsung.
+- Pencarian pelanggan (`input` event) + filter status + tombol reset di empty state.
+- Filter status pesanan, dengan hitungan baris hidup (`#ordCount`).
+- Sort tabel kanal via klik/Enter/Space pada header, `aria-sort` mengikuti arah.
+- Switch tema (sinkron dua arah dengan ikon bulan di header), animasi, notifikasi email.
+- Densitas tabel nyaman/rapat, disimpan di `localStorage['lumina-density']`.
+- Simpan profil (simulasi + pesan status), tombol hapus workspace dua langkah (armed → konfirmasi, reset otomatis 4 detik).
+
+Anchor di dalam konten mockup yang belum punya tujuan tetap tidak melakukan apa-apa — jangan tambahkan `href="#"` baru tanpa handler, itu memantulkan halaman ke atas.
+
 ## Design system (token di `:root`)
+
+Kelas layout baru yang dipakai halaman: `.bars` (bar list horizontal), `.switch`, `.radio`, `.form`/`.field`, `.empty-state`, `.bar-inline` dengan level `.lvl-ok/.lvl-warn/.lvl-bad`, `.pale-right` (kolom kanan lebih lebar). Transisi antar-halaman pakai `.page.is-in` dan otomatis mati lewat `prefers-reduced-motion`.
 
 Palet pastel, aksen ungu→pink:
 

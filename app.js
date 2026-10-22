@@ -1,6 +1,4 @@
 (() => {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-
   /* ── Sparklines: render baked SVG polylines (no layout dependency) ── */
   const W = 160, H = 40;
   document.querySelectorAll('.spark').forEach((el) => {
@@ -34,6 +32,8 @@
 
   function applyTheme(mode) {
     root.dataset.theme = mode;
+    const sw = document.getElementById('themeSwitch');
+    if (sw) sw.setAttribute('aria-checked', String(mode === 'dark'));
     if (!themeBtn) return;
     const dark = mode === 'dark';
     themeBtn.setAttribute('aria-pressed', String(dark));
@@ -41,35 +41,22 @@
     if (icon) icon.setAttribute('href', dark ? '#i-sun' : '#i-moon');
   }
 
-  themeBtn && themeBtn.addEventListener('click', () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-    localStorage.setItem('lumina-theme', next);
-  });
-
-  /* ── Mobile drawer ── */
-  const sidebar = document.getElementById('sidebar');
-  const menuBtn = document.getElementById('menuBtn');
-  const scrim = document.getElementById('scrim');
-
-  const setDrawer = (open) => {
-    sidebar.classList.toggle('is-open', open);
-    menuBtn.setAttribute('aria-expanded', String(open));
-    scrim.hidden = !open;
-    document.body.style.overflow = open ? 'hidden' : '';
-    if (open) sidebar.querySelector('.nav-item')?.focus();
+  window.setTheme = (mode) => {
+    applyTheme(mode);
+    localStorage.setItem('lumina-theme', mode);
   };
 
-  menuBtn && menuBtn.addEventListener('click', () => setDrawer(!sidebar.classList.contains('is-open')));
-  scrim && scrim.addEventListener('click', () => setDrawer(false));
+  themeBtn && themeBtn.addEventListener('click', () => {
+    window.setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ── Search shortcut (drawer + routing live in router.js) ── */
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sidebar.classList.contains('is-open')) { setDrawer(false); menuBtn.focus(); }
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
-      document.querySelector('.search input')?.focus();
+      document.querySelector('.topbar .search input')?.focus();
     }
   });
-  window.matchMedia('(min-width:901px)').addEventListener('change', (e) => { if (e.matches) setDrawer(false); });
 
   /* ── Segmented + filter chips ── */
   const bindGroup = (sel) => {
@@ -87,13 +74,5 @@
   bindGroup('.seg');
   bindGroup('.filters');
 
-  /* ── Chart entrance (skipped under reduced motion) ── */
-  if (!reduce.matches) {
-    document.querySelectorAll('.area path, .card').forEach((el, i) => {
-      el.animate?.(
-        [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
-        { duration: 480, delay: Math.min(i * 45, 320), easing: 'cubic-bezier(.22,.68,.32,1)', fill: 'backwards' }
-      );
-    });
-  }
+  /* Entrance motion comes from the `.page.is-in` CSS animation (router.js). */
 })();
